@@ -21,6 +21,40 @@ Machine Learning - NLP:
                 1. Binary 
                 2. Categorical
                 3. Continuous
-            
+        3. NLP (When the features are in Languages): Independent Features are converted into vectors which provides meaningful information to the model
+        4. Flow for NLP Models: 
+            1. Text Pre-Processing: Step 1 - Data Cleaning
+                a. Tokenization
+                b. Lemmatization
+                c. Stemming
+                d. Stop Words
+            2. Text Pre-Processing: Step 2 - Convert I/P text to vectors
+                a. Bag of Words
+                b. TF-IDF
+                c. Unigrams
+                d. Bi-Grams
+            3. Text Pre-Processing : Step 3 - Convert I/P text to vectors
+                a. Word2Vec
+                b. Average Word2Vec
+            4. Text Pre-Processing : Step 4 - Create word embedding by converting I/P text to vectors - Extension of Step 3
+                1. Static Word Embeddings
+                    a. FastText
+                    b. GloVe
+                2. Contextual Word Embeddings
+                    a. ELMo (Deep Bi-Directional LSTM)
+                    b. BERT
+                    c. GPT
+                    d. RoBERTa
+                3. Sentence and Document Embedding:
+                    a. USE (Universal Sentence Encoder)
+                    b. InferSent
+                    c. SBERT (Sentence BERT)
+            5. Deep Learning Models:
+                a. RNN
+                b. LSTM
+                c. GRU RNN
+            6. Transformer: BERT
+
+
     b. Unsupervised:
         1. 
