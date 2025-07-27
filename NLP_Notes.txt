@@ -1,0 +1,64 @@
+
+Data Pre-Processing:
+
+1. Terminologies:
+    a. Corpus: Paragraph
+    b. Documents - Sentences
+    c. Vocab - Unique Words
+    d. Words - All the words in the Corpus
+
+2. Tokenization: Converts unstructured text into a structured form suitable for analysis, word embeddings, parsing, classification
+Process of breaking a text into smaller units called tokens. These tokens can be:
+Words (e.g., "I love NLP" → ["I", "love", "NLP"])
+Subwords (e.g., "unhappiness" → ["un", "happi", "ness"]) - Used in models like BERT and GPT
+Characters (e.g., "Hi" → ["H", "i"])
+Sentences (e.g., "Hi there. How are you?" → ["Hi there.", "How are you?"])
+    a. Convert paragraph to Sentences : from nltk.tokenize import sent_tokenize
+    b. Convert sentence to words: from nltk.tokenize import word_tokenize, from nltk.tokenize import wordpunct_tokenize, from nltk.tokenize import TreebankWordTokenizer
+    c. Determine unique words: set(filtered_words)
+    d. Flow: Paragraph -> Words -> Convert all words to lower case and remove punctuations -> Remove stop words -> set(filtered_words) to get unique words
+
+3. Stemming: Stemming is the process of reducing words to their root or base form (called the stem), by removing suffixes or prefixes. 
+It helps in grouping different forms of a word so they can be analyzed as a single item.
+    a. from nltk.stem import PorterStemmer
+    b. from nltk.stem import LancasterStemmer - better than PorterStemmer 
+    c. from nltk.stem import SnowballStemmer - better than LancasterStemmer (multiple languages)
+    d. from nltk.stem import RegexStemmer -> Words that matches the regex will be removed -> e.g: RegexStemmer('ing$'): eating -> eat
+    d. Not always helpful as it may change the word while stemming: congratulations -> congratul. Cannot be used for real world applications
+
+4. Lemmatization: Lemmatization is the process of reducing a word to its base or dictionary form, called a lemma, using linguistic knowledge 
+(like parts of speech and morphology - structure and formation of words). Unlike stemming, lemmatization always returns a valid word without changing the meaning
+    a. Import:
+        from nltk.stem import WordNetLemmatizer
+        from nltk.corpus import wordnet
+        # Required downloads
+        nltk.download('punkt')
+        nltk.download('wordnet')
+        nltk.download('omw-1.4')
+        nltk.download('averaged_perceptron_tagger')
+    b. POS tag (position tag):
+        1. Noun - n
+        2. Verb - v
+        3. Adjective - a
+        4. Adverb - r
+    c. Better than Stemming but takes more time than Stemming
+
+5. Stop Words: Stop words are the most common words in a language that often carry little useful information in text analysis. 
+Examples include: English: the, is, in, and, an, of, to, was, etc. They are usually removed during preprocessing to focus on more meaningful words
+```python
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+# Download stopword list (only once)
+nltk.download('stopwords')
+nltk.download('punkt')
+
+# Tokenize the text
+tokens = word_tokenize(text)
+
+# Get English stop words
+stop_words = set(stopwords.words('english'))
+
+# Remove stop words
+filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
+```

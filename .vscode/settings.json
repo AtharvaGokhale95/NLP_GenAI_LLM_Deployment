@@ -1,11 +1,22 @@
 {
     "cSpell.words": [
+        "congratul",
+        "happi",
         "Lemmatization",
+        "Lemmatizer",
         "LSTM",
         "myenv",
+        "nltk",
+        "punkt",
         "SBERT",
+        "stopword",
+        "stopwords",
+        "Subwords",
+        "Treebank",
         "Unigrams",
         "venv",
-        "virtualenv"
+        "virtualenv",
+        "wordnet",
+        "wordpunct"
     ]
 }

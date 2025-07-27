@@ -54,6 +54,9 @@ Machine Learning - NLP:
                 b. LSTM
                 c. GRU RNN
             6. Transformer: BERT
+        5. Libraries Used:
+            1. ML Libraries: NLTK, Spacy
+            2. Deep Learning: TensorFlow, PyTorch
 
 
     b. Unsupervised:
