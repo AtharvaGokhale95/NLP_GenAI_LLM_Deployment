@@ -1,10 +1,13 @@
 {
     "cSpell.words": [
+        "chunker",
         "congratul",
         "happi",
         "Lemmatization",
+        "lemmatize",
         "Lemmatizer",
         "LSTM",
+        "maxent",
         "myenv",
         "nltk",
         "punkt",

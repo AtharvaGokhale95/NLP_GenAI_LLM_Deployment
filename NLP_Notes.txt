@@ -22,7 +22,7 @@ Sentences (e.g., "Hi there. How are you?" → ["Hi there.", "How are you?"])
 It helps in grouping different forms of a word so they can be analyzed as a single item.
     a. from nltk.stem import PorterStemmer
     b. from nltk.stem import LancasterStemmer - better than PorterStemmer 
-    c. from nltk.stem import SnowballStemmer - better than LancasterStemmer (multiple languages)
+    c. from nltk.stem import SnowballStemmer - better than LancasterStemmer (multiple languages), converts all tokens to lowercase
     d. from nltk.stem import RegexStemmer -> Words that matches the regex will be removed -> e.g: RegexStemmer('ing$'): eating -> eat
     d. Not always helpful as it may change the word while stemming: congratulations -> congratul. Cannot be used for real world applications
 
@@ -45,20 +45,19 @@ It helps in grouping different forms of a word so they can be analyzed as a sing
 
 5. Stop Words: Stop words are the most common words in a language that often carry little useful information in text analysis. 
 Examples include: English: the, is, in, and, an, of, to, was, etc. They are usually removed during preprocessing to focus on more meaningful words
-```python
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
+    a. from nltk.corpus import stopwords
+    b. # Download stopword list (only once)
+        nltk.download('stopwords')
+        nltk.download('punkt')
+    c. # Get English stop words -> stop_words = set(stopwords.words('english'))
+    d. # Remove stop words -> filtered_tokens = [lemmatizer.lemmatize(word.lower(), pos='v) for word in tokens if word.lower() not in stop_words]
 
-# Download stopword list (only once)
-nltk.download('stopwords')
-nltk.download('punkt')
-
-# Tokenize the text
-tokens = word_tokenize(text)
-
-# Get English stop words
-stop_words = set(stopwords.words('english'))
-
-# Remove stop words
-filtered_tokens = [word for word in tokens if word.lower() not in stop_words]
-```
+6. Part of Speech Tagging: Part of Speech Tagging is the process of assigning a grammatical category (POS tag) to each word in a sentence, such as:
+Noun (NN) — person, place, thing
+Verb (VB) — action or state
+Adjective (JJ) — describes a noun
+Adverb (RB) — modifies a verb, adjective, or another adverb
+Pronoun (PRP), Preposition (IN), Conjunction (CC), etc
+    a. Libraries to download:
+        1. nltk.download('punkt')
+        2. nltk.download('averaged_perceptron_tagger')
