@@ -61,3 +61,24 @@ Pronoun (PRP), Preposition (IN), Conjunction (CC), etc
     a. Libraries to download:
         1. nltk.download('punkt')
         2. nltk.download('averaged_perceptron_tagger')
+
+7. Named Entity Recognition: Named Entity Recognition (NER) is the process of identifying and classifying named entities in text into predefined categories such as:
+Person names — “Barack Obama”
+Locations — “New York”, “India”
+Organizations — “Google”, “UNICEF”
+Dates & times — “July 4th”, “2 PM”
+Monetary values — “$500”
+Products, events, works of art, etc
+    a. Libraries to download:
+        1. nltk.download('punkt')
+        2. nltk.download('averaged_perceptron_tagger')
+        3. nltk.download('maxent_ne_chunker')
+        4. nltk.download('words')
+
+
+Flow of data-preprocessing before converting the texts into vectors:
+Tokenization -> lowercase -> Regular Expression -> Stemming/ Lemmatization -> stopword -> convert text to Vector
+
+
+Techniques to convert text to vectors:
+1. 
