@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
+        "atharva",
         "chunker",
         "congratul",
         "happi",
@@ -17,6 +18,7 @@
         "Subwords",
         "Treebank",
         "Unigrams",
+        "Vectorizer",
         "venv",
         "virtualenv",
         "wordnet",

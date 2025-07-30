@@ -81,4 +81,30 @@ Tokenization -> lowercase -> Regular Expression -> Stemming/ Lemmatization -> st
 
 
 Techniques to convert text to vectors:
-1. 
+1. One Hot encoding:
+    a. Determine unique vocabulary
+    b. The dimension of each vector = count of unique words
+    c. Assign an index to each word.
+    d. For each word, create a vector: All values are 0, except for 1 at the index of that word
+    e. There will be vector in binary for each token/ word 
+    f. For a particular sentence, we will get a matrix of size no of (No of words in that sentence x Total no of unique words)
+    g. Limitations:
+        1. Creates sparse matrix - Includes a lot of 1s and 0s -> Leads to over-fitting
+        2. Missing Fixed size vectors - Depends on words in each sentence
+        3. Does not capture semantic meaning - Semantic meaning: Understanding what the text is actually saying, not just recognizing the words
+        4. Out of vocabulary (OOV) - If we get a new word in the test data set which is not present in the vocabulary, we won't be able to generate the accurate vectors
+
+2. Bag of Words: Types: Binary BOW and BOW 
+    a. Convert all words to lower case - Remove stop words
+    b. Determine vocabulary
+    c. Create a table in descending order for each word and its frequency in the corpus
+    d. Select only top 10 words/ features
+    e. The vectors are created for entire sentence
+    g. The size of each vector will be constant: Matrix - No of sentences in the corpus x No of unique words in the vocabulary (first column with highest frequency)
+    h. Limitation:
+        1. Creates sparse matrix - Includes a lot of 1s and 0s -> Leads to over-fitting
+        2. Does not capture semantic meaning - Semantic meaning: Understanding what the text is actually saying, not just recognizing the words
+        3. Out of vocabulary (OOV) - If we get a new word in the test data set which is not present in the vocabulary, we won't be able to generate the accurate vectors 
+
+3. N-Grams:
+    a. 
