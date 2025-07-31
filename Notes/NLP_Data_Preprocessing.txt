@@ -1,0 +1,142 @@
+
+Data Pre-Processing:
+
+1. Terminologies:
+    a. Corpus: Paragraph
+    b. Documents - Sentences
+    c. Vocab - Unique Words
+    d. Words - All the words in the Corpus
+
+2. Tokenization: Converts unstructured text into a structured form suitable for analysis, word embeddings, parsing, classification
+Process of breaking a text into smaller units called tokens. These tokens can be:
+Words (e.g., "I love NLP" → ["I", "love", "NLP"])
+Subwords (e.g., "unhappiness" → ["un", "happi", "ness"]) - Used in models like BERT and GPT
+Characters (e.g., "Hi" → ["H", "i"])
+Sentences (e.g., "Hi there. How are you?" → ["Hi there.", "How are you?"])
+    a. Convert paragraph to Sentences : from nltk.tokenize import sent_tokenize
+    b. Convert sentence to words: from nltk.tokenize import word_tokenize, from nltk.tokenize import wordpunct_tokenize, from nltk.tokenize import TreebankWordTokenizer
+    c. Determine unique words: set(filtered_words)
+    d. Flow: Paragraph -> Words -> Convert all words to lower case and remove punctuations -> Remove stop words -> set(filtered_words) to get unique words
+
+3. Stemming: Stemming is the process of reducing words to their root or base form (called the stem), by removing suffixes or prefixes. 
+It helps in grouping different forms of a word so they can be analyzed as a single item.
+    a. from nltk.stem import PorterStemmer
+    b. from nltk.stem import LancasterStemmer - better than PorterStemmer 
+    c. from nltk.stem import SnowballStemmer - better than LancasterStemmer (multiple languages), converts all tokens to lowercase
+    d. from nltk.stem import RegexStemmer -> Words that matches the regex will be removed -> e.g: RegexStemmer('ing$'): eating -> eat
+    d. Not always helpful as it may change the word while stemming: congratulations -> congratul. Cannot be used for real world applications
+
+4. Lemmatization: Lemmatization is the process of reducing a word to its base or dictionary form, called a lemma, using linguistic knowledge 
+(like parts of speech and morphology - structure and formation of words). Unlike stemming, lemmatization always returns a valid word without changing the meaning
+    a. Import:
+        from nltk.stem import WordNetLemmatizer
+        from nltk.corpus import wordnet
+        # Required downloads
+        nltk.download('punkt')
+        nltk.download('wordnet')
+        nltk.download('omw-1.4')
+        nltk.download('averaged_perceptron_tagger')
+    b. POS tag (position tag):
+        1. Noun - n
+        2. Verb - v
+        3. Adjective - a
+        4. Adverb - r
+    c. Better than Stemming but takes more time than Stemming
+
+5. Stop Words: Stop words are the most common words in a language that often carry little useful information in text analysis. 
+Examples include: English: the, is, in, and, an, of, to, was, etc. They are usually removed during preprocessing to focus on more meaningful words
+    a. from nltk.corpus import stopwords
+    b. # Download stopword list (only once)
+        nltk.download('stopwords')
+        nltk.download('punkt')
+    c. # Get English stop words -> stop_words = set(stopwords.words('english'))
+    d. # Remove stop words -> filtered_tokens = [lemmatizer.lemmatize(word.lower(), pos='v) for word in tokens if word.lower() not in stop_words]
+
+6. Part of Speech Tagging: Part of Speech Tagging is the process of assigning a grammatical category (POS tag) to each word in a sentence, such as:
+Noun (NN) — person, place, thing
+Verb (VB) — action or state
+Adjective (JJ) — describes a noun
+Adverb (RB) — modifies a verb, adjective, or another adverb
+Pronoun (PRP), Preposition (IN), Conjunction (CC), etc
+    a. Libraries to download:
+        1. nltk.download('punkt')
+        2. nltk.download('averaged_perceptron_tagger')
+
+7. Named Entity Recognition: Named Entity Recognition (NER) is the process of identifying and classifying named entities in text into predefined categories such as:
+Person names — “Barack Obama”
+Locations — “New York”, “India”
+Organizations — “Google”, “UNICEF”
+Dates & times — “July 4th”, “2 PM”
+Monetary values — “$500”
+Products, events, works of art, etc
+    a. Libraries to download:
+        1. nltk.download('punkt')
+        2. nltk.download('averaged_perceptron_tagger')
+        3. nltk.download('maxent_ne_chunker')
+        4. nltk.download('words')
+
+
+Flow of data-preprocessing before converting the texts into vectors:
+Tokenization -> lowercase -> Regular Expression -> Stemming/ Lemmatization -> stopword -> convert text to Vector
+
+
+Techniques to convert text to vectors:
+1. One Hot encoding:
+    a. Determine unique vocabulary
+    b. The dimension of each vector = count of unique words
+    c. Assign an index to each word.
+    d. For each word, create a vector: All values are 0, except for 1 at the index of that word
+    e. There will be vector in binary for each token/ word 
+    f. For a particular sentence, we will get a matrix of size no of (No of words in that sentence x Total no of unique words)
+    g. Limitations:
+        1. Creates sparse matrix - Includes a lot of 1s and 0s -> Leads to over-fitting
+        2. Missing Fixed size vectors - Depends on words in each sentence
+        3. Does not capture semantic meaning - Semantic meaning: Understanding what the text is actually saying, not just recognizing the words
+        4. Out of vocabulary (OOV) - If we get a new word in the test data set which is not present in the vocabulary, we won't be able to generate the accurate vectors
+
+2. Bag of Words: Types: Binary BOW and BOW 
+    a. Convert all words to lower case - Remove stop words
+    b. Determine vocabulary
+    c. Create a table in descending order for each word and its frequency in the corpus
+    d. Select only top 10 words/ features
+    e. The vectors are created for entire sentence
+    g. The size of each vector will be constant: Matrix - No of sentences in the corpus x No of unique words in the vocabulary (first column with highest frequency)
+    h. Limitation:
+        1. Creates sparse matrix - Includes a lot of 1s and 0s -> Leads to over-fitting
+        2. Does not capture semantic meaning - Semantic meaning: Understanding what the text is actually saying, not just recognizing the words
+        3. Out of vocabulary (OOV) - If we get a new word in the test data set which is not present in the vocabulary, we won't be able to generate the accurate vectors 
+
+3. N-Grams:
+    a. Combination of N words in the unique vocabulary
+    b. The unique vocabulary will be the unique individual words and combination of 2 unique words
+    c. In sklearn: n-gram = (1, 2): Combination of single unique words and pair of 2 unique words
+    d. Gives more semantic information as compared to simple BOW
+
+4. TF-IDF: Stands for Term Frequency–Inverse Document Frequency. It's a numerical statistic that reflects how important a word is to a document in a collection or corpus
+    1. TF(t,d)= Number of times term t appears in document d/ Total unique terms in document d
+        Higher TF -> Frequent word
+        Low TF -> Less frequent word
+
+    2. IDF(t)=log(N/ 1+df(t)) 
+        where N = total no of documents (sentences)
+        df(t) = number of documents containing term t
+        +1 avoids division by 0
+        if a word appears in every document, its IDF is low (close to 0).
+        If a word is rare, its IDF is high.
+
+    3. TF-IDF is better than BOW for following reasons:
+        1. Boosting rare, informative words
+        2. Penalizing frequent, unimportant words
+
+    4. Why we do TF * IDF: Focus on words that are important in a document but rare in the corpus
+        1. TF (Term Frequency) → How important is this word in this document?
+        2. IDF (Inverse Document Frequency) → How rare is this word across all documents?
+        3. Multiplication helps you:
+            1. Boost terms that are both frequent and rare (important)
+            2. Suppress terms that are either:
+                a. Rare but not in this document (TF is 0)
+                b. Common across all documents (IDF is low)
+
+
+​
+ 
