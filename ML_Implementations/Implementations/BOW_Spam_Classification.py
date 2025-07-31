@@ -1,52 +1,84 @@
-def setup_nlp_environment():
-    import pandas as pd
-    import re
-    import nltk
-    nltk.download('stopwords')
-    from nltk.corpus import stopwords
-    from nltk.stem.porter import PorterStemmer
-    from sklearn.feature_extraction.text import CountVectorizer
-    
-    # Initialize stemmer
-    PS = PorterStemmer()
-    
-    # Initialize CountVectorizer
-    cv = CountVectorizer(max_features=100, binary=True)
-    
-    return {
-        'pd': pd,
-        're':re,
-        'nltk': nltk,
-        'stopwords': stopwords,
-        'PS': PS,
-        'cv': cv
-    }
+import pandas as pd
+import string
+import re
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+import nltk
 
-def read_csv_file(path_to_data):
-    messages = env['pd'].read_csv(path_to_data, sep = ',', encoding='latin1', names=['Label', 'Message', 'c1', 'c2', 'c3'], header = 0)
-    # names attribute renames the columns and header tells panda to skip the first row as column names and use the new column names
-    messages = messages.drop(messages.columns[-3 : ], axis = 1)
-    return messages
+# Ensure NLTK stopwords are available
+nltk.download('stopwords')
 
-def data_preprocessing(messages):
-    corpus = []                                                                 # Create a empty list in which we can store the processed text     
-    for idx in range(0, len(messages)):
-        review = env['re'].sub('[^a-zA-Z]', ' ', messages['Message'][idx])      # Anything apart from a - z and A - Z, replace with " ". Only keep the characters
-        # review is a string which contains a sentence which will be appended as a element in the list corpus
-        review = review.split()                                                 # Split a sentence into words
-        review = [env['PS'].stem(word) for word in review if word.lower() not in env['stopwords'].words('english')]
-        # 1. Convert all the words in lower case
-        # 2. Remove the stopwords
-        # 3. Apply Porter Stemmer
-        review = ' '.join(review)                                               # Joins the words separated by " " to again form a sentence
-        corpus.append(review)
-    return corpus
+# 1. Preprocess a single message
+def preprocess_text(text):
+    text = text.lower()
+    text = text.translate(str.maketrans('', '', string.punctuation))
+    text = re.sub(r'\d+', '', text)
+    text = re.sub('[^a-zA-Z]', " ", text)
+    words = text.split()
+    stop_words = set(stopwords.words('english'))
+    words = [word for word in words if word.isalpha() and word not in stop_words]
+    stemmer = PorterStemmer()
+    words = [stemmer.stem(word) for word in words]
+    return ' '.join(words)
 
-def BOW_text_to_vector(corpus):
-    X = env['cv'].fit('corpus').toArray()
-    
+# 2. Load and preprocess the dataset
+def load_and_preprocess(filepath):
+    df = pd.read_csv(filepath, encoding='ISO-8859-1')[['v1', 'v2']]
+    df.columns = ['label', 'message']
+    df['label'] = df['label'].map({'ham': 0, 'spam': 1})
+    df['clean_message'] = df['message'].apply(preprocess_text)
+    return df
 
-env = setup_nlp_environment()
-messages = read_csv_file('/Users/atharva/Documents/GitHub/NLP_GenAI_LLM_Deployment/ML_Implementations/dataset/spam.csv')
-corpus = data_preprocessing(messages)
-print(corpus[0:5])
+# 3. Vectorize messages using Bag of Words
+def vectorize_text(train_texts, test_texts):
+    vectorizer = CountVectorizer()
+    X_train = vectorizer.fit_transform(train_texts)
+    X_test = vectorizer.transform(test_texts)
+    return X_train, X_test, vectorizer
+
+# 4. Train a Naive Bayes classifier
+def train_model(X_train, y_train):
+    model = MultinomialNB()
+    model.fit(X_train, y_train)
+    return model
+
+# 5. Evaluate the model
+def evaluate_model(model, X_test, y_test):
+    y_pred = model.predict(X_test)
+    print("Confusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    print("\nClassification Report:\n", classification_report(y_test, y_pred))
+    print("Accuracy:", accuracy_score(y_test, y_pred))
+
+# 6. Main runner function
+def run_spam_classifier(csv_path):
+    df = load_and_preprocess(csv_path)
+    X_train_text, X_test_text, y_train, y_test = train_test_split(
+        df['clean_message'], df['label'], test_size=0.2, random_state=42
+    )
+    X_train, X_test, vectorizer = vectorize_text(X_train_text, X_test_text)
+    model = train_model(X_train, y_train)
+    evaluate_model(model, X_test, y_test)
+    return model, vectorizer
+
+# 7. Run the pipeline
+if __name__ == '__main__':
+    model, vectorizer = run_spam_classifier('/Users/atharva/Documents/GitHub/NLP_GenAI_LLM_Deployment/ML_Implementations/dataset/spam.csv')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
