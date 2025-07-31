@@ -107,4 +107,36 @@ Techniques to convert text to vectors:
         3. Out of vocabulary (OOV) - If we get a new word in the test data set which is not present in the vocabulary, we won't be able to generate the accurate vectors 
 
 3. N-Grams:
-    a. 
+    a. Combination of N words in the unique vocabulary
+    b. The unique vocabulary will be the unique individual words and combination of 2 unique words
+    c. In sklearn: n-gram = (1, 2): Combination of single unique words and pair of 2 unique words
+    d. Gives more semantic information as compared to simple BOW
+
+4. TF-IDF: Stands for Term Frequency–Inverse Document Frequency. It's a numerical statistic that reflects how important a word is to a document in a collection or corpus
+    1. TF(t,d)= Number of times term t appears in document d/ Total unique terms in document d
+        Higher TF -> Frequent word
+        Low TF -> Less frequent word
+
+    2. IDF(t)=log(N/ 1+df(t)) 
+        where N = total no of documents (sentences)
+        df(t) = number of documents containing term t
+        +1 avoids division by 0
+        if a word appears in every document, its IDF is low (close to 0).
+        If a word is rare, its IDF is high.
+
+    3. TF-IDF is better than BOW for following reasons:
+        1. Boosting rare, informative words
+        2. Penalizing frequent, unimportant words
+
+    4. Why we do TF * IDF: Focus on words that are important in a document but rare in the corpus
+        1. TF (Term Frequency) → How important is this word in this document?
+        2. IDF (Inverse Document Frequency) → How rare is this word across all documents?
+        3. Multiplication helps you:
+            1. Boost terms that are both frequent and rare (important)
+            2. Suppress terms that are either:
+                a. Rare but not in this document (TF is 0)
+                b. Common across all documents (IDF is low)
+
+
+​
+ 
