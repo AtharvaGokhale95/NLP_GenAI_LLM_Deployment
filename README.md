@@ -57,7 +57,3 @@ Machine Learning - NLP:
         5. Libraries Used:
             1. ML Libraries: NLTK, Spacy
             2. Deep Learning: TensorFlow, PyTorch
-
-
-    b. Unsupervised:
-        1. 
