@@ -31,9 +31,14 @@ Slope of a Line: ![alt text](image-1.png)
         c. If the slope is positive, we move to the left in order to reduce the loss, if the slope is -ve we move to the right
         d. Explanation: ![alt text](image-2.png)
         e. Learning Rate: 'Alpha' is the learning rate. Intuition: ![alt text](image-3.png)
-        f. 
 
-    2. Loss functions:
+Linear Regression Model - Gradient Descent Algorithm (With MSE loss function): ![alt text](image-4.png)
+    a. The Linear Regression is nothing but the question of a line: y = mx + c, where m is slope of the line
+    b. The Loss function in this case is MSE: ![alt text](image-5.png)
+    c. Now, we will use Gradient Descent to find the local minimum of the loss function using the formulae: ![alt text](image.png)
+    d. Final Equation: ![alt text](image-6.png)
+
+    1. Loss functions:
         1. For Regression:
             a. Mean Squared Error: Penalizes larger error (sensitive to outliers), smooths gradients
             b. Mean Absolute Error: Treats all errors Equally, Less sensitive to outliers
