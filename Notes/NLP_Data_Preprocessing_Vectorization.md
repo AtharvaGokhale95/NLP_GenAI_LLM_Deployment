@@ -164,4 +164,5 @@ Techniques to convert text to vectors:
         cosine similarity = cos(angle between the 2 vectors)
     4. Higher the distance, less similar are the 2 words, smaller the distance, the 2 words are more similar
 
-​8. CBOW: ![alt text](image.png)
+​8. CBOW:
+    1. Intuition: ![alt text](image.png)
