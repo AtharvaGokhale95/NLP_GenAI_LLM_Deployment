@@ -170,6 +170,9 @@ Techniques to convert text to vectors:
     2. Generate the unique vocabulary from the corpus
     3. Select the window size (odd no)
     4. Based on the window size, create I/P vectors using (OHE)
+    5. Better for small dataset
 
 9. Skip gram: Method that learns word embeddings by trying to predict surrounding context words given a center (input) word
    1. Intuition: ![alt text](Images/image-4.png)
+   2. Better for rare words/ large datasets
+
