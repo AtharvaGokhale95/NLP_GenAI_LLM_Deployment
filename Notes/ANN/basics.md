@@ -5,7 +5,7 @@ It is especially powerful for:
     3. Image and speech recognition
     4. Natural language processing (NLP)
 
-ANN Structure: ![alt text](image-7.png)
+ANN Structure: ![alt text](Images/image-7.png)
     1. At its core, an ANN is composed of layers of neurons:
         1. Input Layer
             a. Accepts the raw input data (e.g., features like age, height, word embeddings).
@@ -31,16 +31,16 @@ Loss Function: Measures how far is the predicted output (y^) from the actual out
             a. Cross Entropy Loss (Log Loss)
             b. Hinge Loss (for SVM)
 
-Slope of a Line: ![alt text](image-1.png)
+Slope of a Line: ![alt text](Images/image-1.png)
     1. Gradient descent:
-        a. Algorithm to minimize the loss function: ![alt text](image.png)
+        a. Algorithm to minimize the loss function: ![alt text](Images/image.png)
         b. Calculating the derivative of the loss function (which is defined), tells whether the slope of the line is +ve or -ve
         c. If the slope is positive, we move to the left in order to reduce the loss, if the slope is -ve we move to the right
-        d. Explanation: ![alt text](image-2.png)
-        e. Learning Rate: 'Alpha' is the learning rate. Intuition: ![alt text](image-3.png)
+        d. Explanation: ![alt text](Images/image-2.png)
+        e. Learning Rate: 'Alpha' is the learning rate. Intuition: ![alt text](Images/image-3.png)
 
-Linear Regression Model - Gradient Descent Algorithm (With MSE loss function): ![alt text](image-4.png)
+Linear Regression Model - Gradient Descent Algorithm (With MSE loss function): ![alt text](Images/image-4.png)
     a. The Linear Regression is nothing but the question of a line: y = mx + c, where m is slope of the line
-    b. The Loss function in this case is MSE: ![alt text](image-5.png)
-    c. Now, we will use Gradient Descent to find the local minimum of the loss function using the formulae: ![alt text](image.png)
-    d. Final Equation: ![alt text](image-6.png)
+    b. The Loss function in this case is MSE: ![alt text](Images/image-5.png)
+    c. Now, we will use Gradient Descent to find the local minimum of the loss function using the formulae: ![alt text](Images/image.png)
+    d. Final Equation: ![alt text](Images/image-6.png)
