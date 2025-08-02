@@ -80,7 +80,7 @@ Tokenization -> lowercase -> Regular Expression -> Stemming/ Lemmatization -> st
 
 
 Techniques to convert text to vectors:
-1. One Hot encoding: Vector for each word
+1. One Hot encoding: Vector for each word: ![alt text](image-2.png)
     a. Determine unique vocabulary
     b. The dimension of each vector = count of unique words
     c. Assign an index to each word.
@@ -93,7 +93,7 @@ Techniques to convert text to vectors:
         3. Does not capture semantic meaning - Semantic meaning: Understanding what the text is actually saying, not just recognizing the words
         4. Out of vocabulary (OOV) - If we get a new word in the test data set which is not present in the vocabulary, we won't be able to generate the accurate vectors
 
-2. Bag of Words: Types: Binary BOW and BOW - Vector for a sentence
+2. Bag of Words: Types: Binary BOW and BOW - Vector for a sentence: ![alt text](image-1.png)
     a. Convert all words to lower case - Remove stop words
     b. Determine vocabulary
     c. Create a table in descending order for each word and its frequency in the corpus
@@ -116,19 +116,20 @@ Techniques to convert text to vectors:
     2. TF(t,d)= Number of times term t appears in document d/ Total unique terms in document d
         Higher TF -> Frequent word
         Low TF -> Less frequent word
+    3. Intuition: ![alt text](image-3.png)
 
-    3. IDF(t)=log(N/ 1+df(t)) - Just one value for a each unique word
+    4. IDF(t)=log(N/ 1+df(t)) - Just one value for a each unique word
         where N = total no of documents (sentences)
         df(t) = number of documents containing term t
         +1 avoids division by 0
         if a word appears in every document, its IDF is low (close to 0).
         If a word is rare, its IDF is high.
 
-    4. TF-IDF is better than BOW for following reasons:
+    5. TF-IDF is better than BOW for following reasons:
         1. Boosting rare, informative words
         2. Penalizing frequent, unimportant words
 
-    5. Why we do TF * IDF: Focus on words that are important in a document but rare in the corpus
+    6. Why we do TF * IDF: Focus on words that are important in a document but rare in the corpus
         1. TF (Term Frequency) → How important is this word in this document?
         2. IDF (Inverse Document Frequency) → How rare is this word across all documents?
         3. Multiplication helps you:
@@ -166,3 +167,6 @@ Techniques to convert text to vectors:
 
 ​8. CBOW:
     1. Intuition: ![alt text](image.png)
+    2. Generate the unique vocabulary from the corpus
+    3. Select the window size (odd no)
+    4. Based on the window size, create I/P vectors using (OHE, )
