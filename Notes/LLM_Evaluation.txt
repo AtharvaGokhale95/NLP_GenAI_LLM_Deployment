@@ -1,9 +1,0 @@
-1. BLEU: Bilingual Evaluation Understudy
-    a. BLEU compares the n-grams (sequences of words) of the generated text with those of one or more reference texts (ground truth) and calculates how similar they are.
-    b. N-gram precision: Measures how many n-grams in the generated text match the reference.
-    c. Brevity penalty: Penalizes overly short outputs.
-    d. BLEU combines precision of 1-gram, 2-gram, ..., typically up to 4-gram
-    e. Limitations:
-        a. Does not capture meaning or paraphrasing well.
-        b. Better suited for short-form generation (like translations) than for creative or open-ended outputs.
-        c. Can be misleading for tasks where multiple valid outputs exist
