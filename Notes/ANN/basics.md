@@ -25,10 +25,13 @@ Loss Function: Measures how far is the predicted output (y^) from the actual out
                back-propagation and gradient descent
 
 Slope of a Line: ![alt text](image-1.png)
-
-    1. Gradient descent: 
-        a. Algorithm to minimize the loss function: ![alt text](image-2.png)
-        
+    1. Gradient descent:
+        a. Algorithm to minimize the loss function: ![alt text](image.png)
+        b. Calculating the derivative of the loss function (which is defined), tells whether the slope of the line is +ve or -ve
+        c. If the slope is positive, we move to the left in order to reduce the loss, if the slope is -ve we move to the right
+        d. Explanation: ![alt text](image-2.png)
+        e. Learning Rate: 'Alpha' is the learning rate. Intuition: ![alt text](image-3.png)
+        f. 
 
     2. Loss functions:
         1. For Regression:
