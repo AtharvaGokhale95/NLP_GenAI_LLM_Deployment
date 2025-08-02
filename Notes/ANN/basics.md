@@ -23,6 +23,13 @@ ANN Structure
 
 Loss Function: Measures how far is the predicted output (y^) from the actual output (y). It quantifies the error and helps model to improve the prediction through 
                back-propagation and gradient descent
+        1. For Regression:
+            a. Mean Squared Error: Penalizes larger error (sensitive to outliers), smooths gradients
+            b. Mean Absolute Error: Treats all errors Equally, Less sensitive to outliers
+            c. Huber Loss
+        2. Classification:
+            a. Cross Entropy Loss (Log Loss)
+            b. Hinge Loss (for SVM)
 
 Slope of a Line: ![alt text](image-1.png)
     1. Gradient descent:
@@ -37,12 +44,3 @@ Linear Regression Model - Gradient Descent Algorithm (With MSE loss function): !
     b. The Loss function in this case is MSE: ![alt text](image-5.png)
     c. Now, we will use Gradient Descent to find the local minimum of the loss function using the formulae: ![alt text](image.png)
     d. Final Equation: ![alt text](image-6.png)
-
-    1. Loss functions:
-        1. For Regression:
-            a. Mean Squared Error: Penalizes larger error (sensitive to outliers), smooths gradients
-            b. Mean Absolute Error: Treats all errors Equally, Less sensitive to outliers
-            c. Huber Loss
-        2. Classification:
-            a. Cross Entropy Loss (Log Loss)
-            b. Hinge Loss (for SVM)
