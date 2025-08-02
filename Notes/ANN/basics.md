@@ -5,7 +5,7 @@ It is especially powerful for:
     3. Image and speech recognition
     4. Natural language processing (NLP)
 
-ANN Structure
+ANN Structure: ![alt text](image-7.png)
     1. At its core, an ANN is composed of layers of neurons:
         1. Input Layer
             a. Accepts the raw input data (e.g., features like age, height, word embeddings).

@@ -146,7 +146,7 @@ Techniques to convert text to vectors:
     2. Deep Learning: word2vec - Neural Network model to learn word association, detect synonyms, suggest additional words for partial sentence 
             1. Continuous BOW (CBOW)
             2. Skipgram
-    
+
 6. Word2Vec Details: Google Model trained on 100 billion words and 300 features, resulting in 300-dimensional vectors
     1. Each unique word in the vocabulary is converted into a vector based on set features (Feature Representation)
     2. There are set features to train the word2vec model, e.g: Gender, Age, Food, Royal, etc
@@ -154,8 +154,8 @@ Techniques to convert text to vectors:
     4. If the word and on of the feature are related then the value will be higher. e.g: For word 'Apple', the value for Food Feature will be 0.95 whereas for word 'Tires' will be 0.001 as Apple is a type of food but tire is not a type of food
     5. For words like boy and girl, the value for gender feature will be +1 for a girl and -1 for a boy as these are opposite genders
     6. For words like king and queen, the value for royal feature will be similar, 0.94 for king and 0.97 for a queen as these words are similar from the feature 'royal' perspective
-    6. If we have decided to have 500 features to train the word2vec model, each word will be represented as a vector of dimension [300 x 1] - 300 rows and 1 column
-    7. The values in the vectors are in the range of -1 to +1, where 0 means less related and +/-1 is vry related to the feature
+    7. If we have decided to have 500 features to train the word2vec model, each word will be represented as a vector of dimension [300 x 1] - 300 rows and 1 column
+    8. The values in the vectors are in the range of -1 to +1, where 0 means less related and +/-1 is vry related to the feature
 
 7. Cosine Similarity:
     1. Let's consider the vector are 2-dimensional
@@ -164,5 +164,4 @@ Techniques to convert text to vectors:
         cosine similarity = cos(angle between the 2 vectors)
     4. Higher the distance, less similar are the 2 words, smaller the distance, the 2 words are more similar
 
-​
- 
+​8. CBOW: ![alt text](image.png)
