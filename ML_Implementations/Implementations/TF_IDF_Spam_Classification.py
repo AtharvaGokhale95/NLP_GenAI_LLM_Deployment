@@ -37,7 +37,7 @@ def load_and_preprocess(filepath):
     
 # 3. Vectorize messages using TF-IDF (Feature Extraction)
 def vectorize_text(train_texts, test_texts):
-    vectorizer = TfidfVectorizer(ngram_range=(1,2))  # Created an instance of TfidfVectorizer function
+    vectorizer = TfidfVectorizer(ngram_range=(1,2), max_features=100)  # Created an instance of TfidfVectorizer function
     X_train = vectorizer.fit_transform(train_texts)
     # We fit vectorizer on train_texts dataset to generate X_train which are numerical vectors - Learn the structure of the text
     X_test = vectorizer.transform(test_texts)
