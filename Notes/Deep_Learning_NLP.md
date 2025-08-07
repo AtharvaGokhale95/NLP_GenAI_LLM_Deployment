@@ -21,4 +21,5 @@ Difference between ANN, CNN and RNN:
    1. Used for Sequential data (text, time series prediction)
    2. Similar Structure as ANN: I/P Layer -> Hidden Layers -> O/P Layer. However, in the hidden layer each neuron is connected all the other neuron to understand the sequence and the context in the input data
    3. Diagram: ![alt text](Images/image-5.png) -> Each word is passed at a different timestamp and all the neurons have the context of the earlier word passed
-   4. Forward propagation: ![alt text](Images/image-6.png)
+   4. Forward propagation: ![alt text](Images/image-6.png) -> O/P_1 = w1 * x11 + b1 for t1, then for t2 O/P_2 = w2 * x12 + (O/P_1 * w') + b2, the new term is the O/P from the first neuron for t1: ![alt text](Images/image-7.png)
+   5. Back propagation: 
