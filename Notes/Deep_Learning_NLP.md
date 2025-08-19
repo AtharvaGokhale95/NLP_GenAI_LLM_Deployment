@@ -19,7 +19,7 @@ Difference between ANN, CNN and RNN:
 
 3. RNN: Recurrent Neural Network
    1. Used for Sequential data (text, time series prediction)
-   2. Similar Structure as ANN: I/P Layer -> Hidden Layers -> O/P Layer. However, in the hidden layer each neuron is connected all the other neuron to understand the sequence and the context in the input data
+   2. Similar Structure as ANN: I/P Layer -> Hidden Layers -> O/P Layer. However, in the hidden layer each neuron is connected to all the other neuron to understand the sequence and the context in the input data
    3. Diagram: ![alt text](Images/image-5.png) -> Each word is passed at a different timestamp and all the neurons have the context of the earlier word passed
    4. Forward propagation: ![alt text](Images/image-6.png) -> O/P_1 = w1 * x11 + b1 for t1, then for t2 O/P_2 = w2 * x12 + (O/P_1 * w') + b2, the new term is the O/P from the first neuron for t1: ![alt text](Images/image-7.png)
    5. Back propagation: We need to update the following weights:
@@ -32,5 +32,5 @@ Difference between ANN, CNN and RNN:
       2. Vanishing Gradient (sigmoid activation functions) -> The starting words in the sentence do not participate much -> The Input Weights are not updated as the derivative term -> 0
       3. In order to deal with vanishing gradient, we can use activation functions like ReLu or Leaky ReLu (derivative of ReLu ~= 1)
 
-4. LSTM RNN: Long Short Term Memory RNN -> This model will be useful for long sentence and will update the weights precisely with all the words in the sentence having their contribution in updating the weights
+4. LSTM RNN: Long Short Term Memory RNN -> This model will be useful for long sentence and will update the weights precisely with all the words in the sentence having equal contribution in updating the weights
    
