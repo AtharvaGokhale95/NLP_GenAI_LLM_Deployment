@@ -60,8 +60,11 @@ def ann_model_definition(X_train):
 # 5. Setup the Tensorboard and define the early stopping conditions
 def setup_tensorboard_earlystopping():
     #Set up Tensorboard:
-    log_dir = "logs/fit" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-    tensorflow_callback = TensorBoard(log_dir, histogram_freq=1)
+    log_dir = "logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorflow_callback = TensorBoard(log_dir = log_dir,
+                                    histogram_freq = 1, 
+                                    write_graph=True,      # Logs the computation graph
+                                    write_images=True)     # Saves weight images
     # Setup Early Stopping:
     early_stopping_callback = EarlyStopping(monitor='val_loss', patience=5, restore_best_weights=True)
     return tensorflow_callback, early_stopping_callback
