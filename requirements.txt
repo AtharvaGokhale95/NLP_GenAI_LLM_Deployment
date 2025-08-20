@@ -9,3 +9,6 @@ streamlit
 scikit-learn
 nltk
 gensim
+tensorflow==2.16.2
+tensorboard
+
