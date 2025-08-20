@@ -15,7 +15,7 @@ def load_and_preprocess(filepath):
     label_encoder_gender = LabelEncoder()                                               # Instance of the class LabelEncoder - Used for binary categories
     df['Gender'] = label_encoder_gender.fit_transform(df['Gender'])                     # This converts Male and Female to 1 and 0
     onehotencoder_geography = OneHotEncoder()                                           # Instance of class OneHotEncoder - Convert categorical to numerical values
-    geography_encoder = onehotencoder_geography.fit_transform(df[['Geography']])        # 2-D array is expected 
+    geography_encoder = onehotencoder_geography.fit_transform(df[['Geography']])        # 2-D array is expected - Provide List of features
     # Create a df with column names returned by the get_feature_names_out method and the values from geography_encoder but converted to array 
     df_geography = pd.DataFrame(geography_encoder.toarray(), columns=onehotencoder_geography.get_feature_names_out(['Geography']))
     df = pd.concat([df.drop('Geography', axis=1), df_geography], axis = 1)              # Concatenate the original df and df_geography
@@ -81,6 +81,7 @@ def train_model(model, X_train, y_train, X_test, y_test, tensorflow_callback, ea
 
 # 7. 
 def save_model(model):
+    # Save the model as .h5 file
     model.save('model.h5')
 
         
