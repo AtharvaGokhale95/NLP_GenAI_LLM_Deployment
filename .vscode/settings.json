@@ -22,6 +22,7 @@
         "propogation",
         "punkt",
         "SBERT",
+        "selectbox",
         "Skipgram",
         "sklearn",
         "Softmax",

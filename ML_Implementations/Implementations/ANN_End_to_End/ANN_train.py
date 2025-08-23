@@ -83,6 +83,11 @@ def train_model(model, X_train, y_train, X_test, y_test, tensorflow_callback, ea
 def save_model(model):
     # Save the model as .h5 file
     model.save('model.h5')
+    
+# 8. Weights at each layer
+def weights(model):
+    weights = model.get_weights()
+    print(weights)
 
         
 def run_ann(filepath):
@@ -93,6 +98,7 @@ def run_ann(filepath):
     tensorflow_callback, early_stopping_callback = setup_tensorboard_earlystopping()
     model = train_model(model, X_train, y_train, X_test, y_test, tensorflow_callback, early_stopping_callback)
     save_model(model)
+    weights(model)
     return model
     
      

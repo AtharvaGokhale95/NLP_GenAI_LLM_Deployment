@@ -4,7 +4,7 @@ import pickle
 import pandas as pd
 import numpy as np
 
-def load_model(filepath):
+def load_trained_model(filepath):
     model = load_model(filepath)
     return model
 
@@ -21,8 +21,8 @@ def preProcess_prediction_data(input_data, onehotencoder_geography,label_encoder
     df = pd.DataFrame([input_data])
     df['Gender'] = label_encoder_gender.transform(df['Gender'])
     geography_encoder = onehotencoder_geography.transform([[input_data['Geography']]]).toarray()
-    geography_encoded_df = pd.DataFrame(geography_encoder, columns = geography_encoder.get_feature_names_out(['Geography']))
-    df = df.concat([df.drop('Geography', axis= 1), geography_encoded_df], axis= 1)
+    geography_encoded_df = pd.DataFrame(geography_encoder, columns = onehotencoder_geography.get_feature_names_out(['Geography']))
+    df = pd.concat([df.drop('Geography', axis= 1), geography_encoded_df], axis= 1)
     df = scaler.transform(df)
     return df
 
@@ -36,7 +36,7 @@ def predict_model(df, model):
     return prediction_probability
 
 def run_ann(filepath, input_data):
-    model = load_model(filepath)
+    model = load_trained_model(filepath)
     onehotencoder_geography, label_encoder_gender, scaler = load_pickle_file(
         '/Users/atharva/Documents/GitHub/NLP_GenAI_LLM_Deployment/ML_Implementations/Implementations/ANN_End_to_End/onehotencoder_geography.pkl',
         '/Users/atharva/Documents/GitHub/NLP_GenAI_LLM_Deployment/ML_Implementations/Implementations/ANN_End_to_End/label_encoder_gender.pkl',
@@ -49,7 +49,7 @@ def run_ann(filepath, input_data):
      
 if __name__ == '__main__':
     prediction_probability = run_ann(
-        '/Users/atharva/Documents/GitHub/NLP_GenAI_LLM_Deployment/ML_Implementations/dataset/Churn_Modelling.csv',
+        '/Users/atharva/Documents/GitHub/NLP_GenAI_LLM_Deployment/ML_Implementations/Implementations/ANN_End_to_End/model.h5',
         input_data = {
             'CreditScore': 600,
             'Geography': 'France',
