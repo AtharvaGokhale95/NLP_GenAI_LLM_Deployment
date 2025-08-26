@@ -51,7 +51,7 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
                3. $i_t$: Vector formed based on $x_t$ and $h_{t-1}
                   1. Think of it as a filter: for each hidden unit, it outputs a value between 0 (ignore completely) and 1 (accept fully)
                   2. We perform element wise multiplication with $\tilde{C}_t do determine how much of each of the new candidate values should be considered while updating the current Cell State
-               4. $\tilde{C}_t$: Vector of new candidate values based on the current input $x_t$ and $h_{t-1}$
+               4. Here $\tilde{C}_t$: Vector of new candidate values based on the current input $x_t$ and $h_{t-1}$
             2. All the above 4 values are vectors of size: [no of neurons in hidden layer x 1]
             3. Finally to update the old Cell state from $C_{t-1}$ to $C_t$:
                1. Multiple $C_{t-1}$ with $f_t$: This basically forgets the information that no more relevant based on the current input $x_t$ and previous stage $h_{t-1}$
