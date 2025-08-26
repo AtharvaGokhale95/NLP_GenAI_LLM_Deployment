@@ -74,8 +74,8 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
       1. For element wise multiplication we need to have the same size of the vectors
       2. Each vector in this case is a concatenated vector of the same size
 
-   7. Now we need to finally calculate the output $C_t$ and $h_t$  for a cell at time step t (for the given neuron/ cell):
-      1. We have already calculate the $C_t$
+   7. Now we need to finally calculate the outputs $C_t$ and $h_t$ for a cell at time step 't' (for the given neuron/ cell):
+      1. We have already calculated the $C_t$
       2. Now We have to calculate the values for $h_t$, where we have following values at hand:
          1. Current Cell State: $C_t$
          2. Current input: $x_t$
@@ -84,3 +84,12 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
             1. Pass the $x_t$ and $h_{t-1}$ through sigmoid to calculate $o_t$: By passing the concatenated through the sigmoid function, we convert all the values between 0 and 1 which allows to decide what part of vector we are going to output
             2. Multiply $o_t$ with tanh($C_t$): $o_t$ will be a value between 0 and 1 and tanh($C_t$) will be a value between -1 and 1
             3. Image: ![alt text](Images/image-12.png)
+   8. List of terminologies in LSTM:
+      1. Input at state 't': $x_t$
+      2. Output from previous state: $h_{t-1}$
+      3. Previous Cell state: $C_{t-1}$
+      4. forget gate layer: $f_t$ = $\sigma$($W_f$ * [$h_{t-1}$, $x_t$] + $b_f$)
+      5. input gate layer: $i_t$ = $\sigma$($W_i$ * [$h_{t-1}$, $x_t$] + $b_i$)
+      6. tanh layer (new candidate cell state): $\tilde{C}_t$ = tanh($W_c$ * [$h_{t-1}$, $x_t$] + + $b_c$)
+      7. Output gate: $o_t$ = $\sigma$($W_o$ * [$h_{t-1}$, $x_t$] + $b_o$) 
+      8. Output: $o_t$ * tanh($C_t$)
