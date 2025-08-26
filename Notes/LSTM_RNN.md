@@ -16,13 +16,15 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
     1. What to keep
     2. What to update
     3. What to throw away
+
 3. LSTM working:
-   1. At each time step (say, each word in a sentence):
+   1. Each any Neural Network, each input neuron is connected to all the neurons in the hidden layer. So, even in LSTM-RNN at t = 1, the values passed as input (a vector representation of the first work in the corpus) will be sent to all the neurons in the hidden layer. Now as the core concept of RNN, each neuron in the hidden layer will be connected with the next neuron to maintain the sequential information, the output of each neuron in the hidden layer will be dependent on the current input, value shared from the initial neuron, and now in case of LSTM, along with the current input, value shared from the initial neuron we will also have the input from the Cell State which will bring the long term memory.
+   2. At each time step (say, each word in a sentence):
       1. The LSTM looks at the current input and previous hidden state
       2. Gates decide what to forget, what new info to add, and what to output
       3. The cell state carries forward the long-term memory
       4. The hidden state is the short-term, immediate output
-   2. $C_t$ is the cell state - the memory of the LSTM at time step 't'
+   3. $C_t$ is the cell state - the memory of the LSTM at time step 't'
       1. Unlike the hidden state $h_t$ (which is like short-term “working memory”), $C_t$ is designed to flow almost unchanged across many time steps so the network doesn’t forget important context
       2. Analogy:
          1. $C_t$ = Your running understanding of the whole plot so far (long-term memory).
@@ -30,9 +32,24 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
       3. So now at input 't', we have following parameters available:
          1. $x_t$ which is the input value at time 't'
          2. $h_{t-1}$ which is the previous hidden state (short term memory - working memory)
-         3. $f_t$ (forget gate layer) -> Based on $x_t$ and $h_{t-1}$, it decides what to throw away from the previous cell state $C_{t-1}$: ![alt text](Images/image-8.png)
+         3. Thus we can now calculate $f_t$ (forget gate layer) -> Based on $x_t$ and $h_{t-1}$, it decides what to throw away from the previous cell state $C_{t-1}$: ![alt text](Images/image-8.png)
             1. The value is between 0 and 1: 1- “completely keep this” while a 0 - “completely get rid of this
-            2. E.g: Language model trying to predict the next word based on all the previous ones. In such a problem, the cell state might include the gender of the present subject, so that the correct pronouns can be used. When we see a new subject, we want to forget the gender of the old subject
-         4. The next step is to decide what new information we’re going to store in the cell state at time step 't' - Update the previous cell state $C_{t-1}$. This is done in 2 parts
-            1. Input Gate Layer: Based on the input $x_t$, it decides which values to update
-            2. tanh layer: Created a vector of new candidate values 
+            2. This value is calculate for each number in $C_{t-1}$ (This is a vector [no of neurons in hidden layer x 1] - Pandas series) - So for each value there will be a value between 0 - 1
+            3. E.g: Language model trying to predict the next word based on all the previous ones. In such a problem, the cell state might include the gender of the present subject, so that the correct pronouns can be used. When we see a new subject, we want to forget the gender of the old subject
+         4. The next step is to decide what new information we’re going to store in the cell state at time step 't' - Update the previous cell state $C_{t-1}$. This is done in 2 parts: ![alt text](Images/image-9.png)
+            1. Input Gate Layer: Based on the input $x_t$, it decides which values to update - decide how much of the new candidate memory $\tilde{C}_t$ should be added to the cell state $C_t$
+            2. tanh layer: Creates a vector of new candidate values $\tilde{C}_t$ (Candidate Cell State). he input gate $i_t$ decides how much of this candidate should actually be added
+            3. In the example of our language model, we’d want to add the gender of the new subject to the cell state, to replace the old one we’re forgetting
+            4. A element wise product is calculate of $i_t$ and $\tilde{C}_t$: ![alt text](Images/image-10.png)
+         5. Update the Cell State $C_{t-1}$ to $C_t$ at time step 't':
+            1. We have the following values to calculate the $C_t$:
+               1. $f_t$: Vector of values between 0 and 1
+                  1. size: [no of neurons in hidden layer x 1]
+               2. $C_{t-1}$: Vector for the previous Cell State of size
+                  1. Each element of the vector represents the “memory” of one hidden unit
+                  2. [no of neurons in hidden layer x 1]
+               3. $i_t$: Vector formed based on $x_t$ and $h_{t-1}
+                  1. Think of it as a filter: for each hidden unit, it outputs a value between 0 (ignore completely) and 1 (accept fully)
+                  2. We perform element wise multiplication with $\tilde{C}_t do determine how much of each of the new candidate values should be considered while updating the current Cell State
+               4. $\tilde{C}_t$: Vector of new candidate values based on the current input $x_t$ and $h_{t-1}$
+            2. All the above 4 values are vectors of size 
