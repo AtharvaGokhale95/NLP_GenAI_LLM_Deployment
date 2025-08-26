@@ -29,10 +29,10 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
          2. $h_t$ = What you’d summarize if someone asked you right now “what’s happening in this chapter?”
       3. So now at input 't', we have following parameters available:
          1. $x_t$ which is the input value at time 't'
-         2. $h_(t-1)$ which is the previous hidden state (short term memory - working memory)
-         3. $f_t$ (forget gate layer) -> Based on $x_t$ and $h_t-1$, it decides what to throw away from the previous cell state $C_t-1$: ![alt text](Images/image-8.png)
+         2. $h_{t-1}$ which is the previous hidden state (short term memory - working memory)
+         3. $f_t$ (forget gate layer) -> Based on $x_t$ and $h_{t-1}$, it decides what to throw away from the previous cell state $C_{t-1}$: ![alt text](Images/image-8.png)
             1. The value is between 0 and 1: 1- “completely keep this” while a 0 - “completely get rid of this
             2. E.g: Language model trying to predict the next word based on all the previous ones. In such a problem, the cell state might include the gender of the present subject, so that the correct pronouns can be used. When we see a new subject, we want to forget the gender of the old subject
-         4. The next step is to decide what new information we’re going to store in the cell state at time step 't' - Update the previous cell state $C_t-1$. This is done in 2 parts
+         4. The next step is to decide what new information we’re going to store in the cell state at time step 't' - Update the previous cell state $C_{t-1}$. This is done in 2 parts
             1. Input Gate Layer: Based on the input $x_t$, it decides which values to update
             2. tanh layer: Created a vector of new candidate values 
