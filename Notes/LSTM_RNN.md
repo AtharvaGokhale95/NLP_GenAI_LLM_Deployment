@@ -91,6 +91,6 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
       4. forget gate layer: $f_t$ = $\sigma$($W_f$ * [$h_{t-1}$, $x_t$] + $b_f$)
       5. input gate layer: $i_t$ = $\sigma$($W_i$ * [$h_{t-1}$, $x_t$] + $b_i$)
       6. tanh layer (new candidate cell state): $\tilde{C}_t$ = tanh($W_c$ * [$h_{t-1}$, $x_t$] + + $b_c$)
-      7. Output gate: $o_t$ = $\sigma$($W_o$ * [$h_{t-1}$, $x_t$] + $b_o$) 
+      7. Output gate: $o_t$ = $\sigma$($W_o$ * [$h_t-1$, $x_t$] + $b_o$) 
       8. Output: $o_t$ * tanh($C_t$)
    9. $h_t$ at each step is a vector which encodes what the model understood about the sentence up to stage 't'. This is compressed knowledge of all the past trends up to time 't' which is revealed by LSTM at that point of time
