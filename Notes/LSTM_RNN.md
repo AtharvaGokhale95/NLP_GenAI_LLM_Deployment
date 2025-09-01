@@ -57,6 +57,9 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
                1. Multiple $C_{t-1}$ with $f_t$: This basically forgets the information that no more relevant based on the current input $x_t$ and previous stage $h_{t-1}$
                2. Multiple $i_t$ with $\tilde{C}_t$: This decides what values are required to be updated in the Cell State vector based on the current input value $x_t$ and previous stage $h_{t-1}$
                3. Finally we add the element wise product: $C_t$ = $f_t$ * $C_{t-1}$ + $i_t$ * $\tilde{C}_t$: ![alt text](Images/image-11.png)
+
+
+
    4. What is $h_t$:
       1. It is is the hidden state (also called the output) of the LSTM at time step 't'
       2. It represents the short-term memory — what the LSTM “outputs” at this time step
@@ -84,6 +87,8 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
             1. Pass the $x_t$ and $h_{t-1}$ through sigmoid to calculate $o_t$: By passing the concatenated through the sigmoid function, we convert all the values between 0 and 1 which allows to decide what part of vector we are going to output
             2. Multiply $o_t$ with tanh($C_t$): $o_t$ will be a value between 0 and 1 and tanh($C_t$) will be a value between -1 and 1
             3. Image: ![alt text](Images/image-12.png)
+
+
    8. List of terminologies in LSTM:
       1. Input at state 't': $x_t$
       2. Output from previous state: $h_{t-1}$
@@ -91,6 +96,6 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
       4. forget gate layer: $f_t$ = $\sigma$($W_f$ * [$h_{t-1}$, $x_t$] + $b_f$)
       5. input gate layer: $i_t$ = $\sigma$($W_i$ * [$h_{t-1}$, $x_t$] + $b_i$)
       6. tanh layer (new candidate cell state): $\tilde{C}_t$ = tanh($W_c$ * [$h_{t-1}$, $x_t$] + + $b_c$)
-      7. Output gate: $o_t$ = $\sigma$($W_o$ * [$h_t-1$, $x_t$] + $b_o$) 
+      7. Output gate: $o_t$ = $\sigma$($W_o$ * [$h_{t-1}$, $x_t$] + $b_o$) 
       8. Output: $o_t$ * tanh($C_t$)
    9. $h_t$ at each step is a vector which encodes what the model understood about the sentence up to stage 't'. This is compressed knowledge of all the past trends up to time 't' which is revealed by LSTM at that point of time
