@@ -38,7 +38,7 @@ LSTM Networks: https://colah.github.io/posts/2015-08-Understanding-LSTMs/
             3. E.g: Language model trying to predict the next word based on all the previous ones. In such a problem, the cell state might include the gender of the present subject, so that the correct pronouns can be used. When we see a new subject, we want to forget the gender of the old subject
          4. The next step is to decide what new information we’re going to store in the cell state at time step 't' - Update the previous cell state $C_{t-1}$. This is done in 2 parts: ![alt text](Images/image-9.png)
             1. Input Gate Layer: Based on the input $x_t$, it decides which values to update - decide how much of the new candidate memory $\tilde{C}_t$ should be added to the cell state $C_t$
-            2. tanh layer: Creates a vector of new candidate values $\tilde{C}_t$ (Candidate Cell State). he input gate $i_t$ decides how much of this candidate should actually be added
+            2. tanh layer: Creates a vector of new candidate values $\tilde{C}_t$ (Candidate Cell State). The input gate $i_t$ decides how much of this candidate should actually be added
             3. In the example of our language model, we’d want to add the gender of the new subject to the cell state, to replace the old one we’re forgetting
             4. A element wise product is calculate of $i_t$ and $\tilde{C}_t$: ![alt text](Images/image-10.png)
          5. Update the Cell State $C_{t-1}$ to $C_t$ at time step 't':
